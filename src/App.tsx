@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useContext } from "react";
 
-import AuthProvider from "./context/auth/AuthProvider";
-import ApiProvder from "./context/api/ApiProvider";
-import Login from "./components/login/Login";
+import { ApiContext } from "./context/api/ApiContext";
 
 function App() {
+    const apiContext = useContext(ApiContext);
+
     return <></>;
 }
 

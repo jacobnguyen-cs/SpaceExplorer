@@ -10,5 +10,9 @@ interface RequireAuthProps {
 export default function RequireAuth(props: RequireAuthProps) {
     const authContext = useContext(AuthContext);
 
-    return authContext.token === "" ? <Navigate to="/login" /> : props.children;
+    return authContext.isLogged === false ? (
+        <Navigate to="/login" />
+    ) : (
+        props.children
+    );
 }

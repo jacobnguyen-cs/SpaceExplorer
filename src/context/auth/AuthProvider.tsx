@@ -9,6 +9,7 @@ interface AuthProviderProps {
 }
 
 export default function AuthProvider(props: AuthProviderProps) {
+    const [isLogged, setIsLogged] = useState<boolean>(false);
     const [token, setToken] = useState<string>(
         localStorage.getItem("authToken") ?? ""
     );
@@ -21,6 +22,7 @@ export default function AuthProvider(props: AuthProviderProps) {
             if (response) {
                 localStorage.setItem("authToken", token);
                 setToken(token);
+                setIsLogged(true);
                 navigate("/");
             }
         } catch (error) {
@@ -30,12 +32,13 @@ export default function AuthProvider(props: AuthProviderProps) {
 
     function logout(): void {
         setToken("");
+        setIsLogged(false);
         localStorage.removeItem("authToken");
         navigate("/login");
     }
 
     return (
-        <AuthContext.Provider value={{ token, login, logout }}>
+        <AuthContext.Provider value={{ token, login, logout, isLogged }}>
             {props.children}
         </AuthContext.Provider>
     );
